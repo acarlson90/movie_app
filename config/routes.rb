@@ -1,9 +1,11 @@
 MovieApp::Application.routes.draw do
   # maps requests for the URL /static_pages/home to the home action in the StaticPages controller
-  get "static_pages/home"
-  get "static_pages/help"
-  get "static_pages/about"
-  get "static_pages/contact"
+  root  'static_pages#home'
+  # this arranges both for a valid page at /help (responding to GET requests) and named route called help_path
+  match '/help',    to: 'static_pages#help',    via: 'get'
+  # matches a GET request for /'about' and routes it to the about action in the StaticPages controller
+  match '/about',   to: 'static_pages#about',   via: 'get'
+  match '/contact', to: 'static_pages#contact', via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
