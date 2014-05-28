@@ -1,6 +1,8 @@
 MovieApp::Application.routes.draw do
+  get "users/new"
   # maps requests for the URL /static_pages/home to the home action in the StaticPages controller
   root  'static_pages#home'
+  match '/signup',   to: 'users#new',            via: 'get'
   # this arranges both for a valid page at /help (responding to GET requests) and named route called help_path
   match '/help',    to: 'static_pages#help',    via: 'get'
   # matches a GET request for /'about' and routes it to the about action in the StaticPages controller
