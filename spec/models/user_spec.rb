@@ -115,4 +115,17 @@ describe User do
       specify { expect(user_for_invalid_password).to be_false }
     end
   end
+
+  describe "email address with mixed case" do
+    # creates a local variable which takes a symbol/variable name (:mixed_case_email) and gets the block/in this case a string ("User@ExAMPle.CoM")
+    let(:mixed_case_email) { "User@ExAMPle.CoM" }
+
+    it "should be saved as all lower-case" do
+      # saves variable to database
+      @user.email = mixed_case_email
+      @user.save
+      # Reload method for reloading a value from the database and the eq method for testing equality
+      expect(@user.reload.email).to eq mixed_case_email.downcase
+    end
+  end
 end
