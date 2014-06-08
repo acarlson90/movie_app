@@ -1,0 +1,17 @@
+<!-- Generates useful error message(s) when there is an invalid user signup -->
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      <!-- Returns the number of errors -->
+      <!-- Pluralize takes an integer argument and then returns the number with a properly pluralized zersion of its second argumen. Underlying this method is a powerful inflector that knows how to pluralize a large number of words, including may with irregular pluras (example: 2, "woman" = 2 women) -->
+        <!-- Result of the pluralize returns "0 errors", "1 error", "2 errors" -->
+      The form contains <%= pluralize(@user.errors.count, "error") %>.
+    </div>
+    <ul>
+    <!-- The empty? method, also works on Rails error objects, returning true for an empty object and false otherwise. The any? method is just the opposite of empty?, returning true if there are any elements present and false otherwise-->
+    <% @user.errors.full_messages.each do |msg| %>
+      <li>* <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

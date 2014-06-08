@@ -1,3 +1,33 @@
+<!-- In order to get the RSpec tests to pass need to define @user in the app/controllers/users_controller.rb file-->
 <% provide(:title, 'Sign Up') %>
 <h1>Sign Up</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+
+<div class="row">
+  <div class="span6 offset3">
+  	<!-- 
+  	form_for creates a form for signing up users: takes in Active Record objects and contructs a form using object's attributes.
+  	Note that form_for uses the "percent-equals" ERb syntax for inserting content
+  	-->
+  	<!-- The presence of the do keyward indicates that form_for takes a block with one variable, called f for "form" -->
+    <%= form_for(@user) do |f| %>
+      <!-- the each time the block is called on the f variable (f.label, f.text_field, etc. it returns code for the element specifically designed to set an attribute of the @user object. In other words, creates the HTML needed to make a labeled text field element appropriate for setting the name attribute of a User model -->
+      
+      <!-- Render a partial called 'shared/error_messages'; this feflects the common Rails convention of using a dedicated shared/ directory for partials expected to be used in views across multiple controllers -->
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.submit "Create My Account", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

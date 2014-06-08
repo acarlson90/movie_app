@@ -1,0 +1,15 @@
+<!--
+# This view uses Embedded Ruby to display the user's name and email address, assuming the existence of an instance variable called @user
+# in order to get the user show view to work, we need to define an @user variable in the corresponding show action in the Users controller
+-->
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>

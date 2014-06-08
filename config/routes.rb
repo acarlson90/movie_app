@@ -1,5 +1,6 @@
 MovieApp::Application.routes.draw do
-  get "users/new"
+  # Resources :users doesn't just add a working users/1 URL; it endows the application with all the actions needed for a RESTful Users resource, along with a large number of named routes for generating user URLS
+  resources :users
   # maps requests for the URL /static_pages/home to the home action in the StaticPages controller
   root  'static_pages#home'
   match '/signup',   to: 'users#new',            via: 'get'
