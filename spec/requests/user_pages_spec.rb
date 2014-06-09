@@ -36,6 +36,14 @@ describe "User Pages" do
   	  	# When submitting invalid data, we expect the user count not to change
   	  	expect { click_button submit }.not_to change(User, :count)
   	  end
+
+      describe "after submission" do
+        before { click_button submit }
+
+        # Verifies user gets an error message when submitting invalid information
+        it { should have_title('Sign Up') }
+        it { should have_content('error') }
+      end
   	end
 
   	# Test simulate the submission of valid data
@@ -51,6 +59,14 @@ describe "User Pages" do
   	  	# When submitting valid data, we expect it to change by 1
   	  	expect { click_button submit }.to change(User, :count).by(1)
   	  end
+
+      describe "after saving the user" do
+        before { click_button submit }
+        let(:user) { User.find_by(email: 'acarlson90@gmail.com') }
+
+        #it { should have_title(user.name) }
+        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+      end
   	end
   end
 end
